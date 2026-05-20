@@ -76,3 +76,19 @@ REMI-DC01
 - Security group management
 - Administrative privilege separation
 - Active Directory identity management
+## RBAC and Identity Management
+
+### User-to-Role Assignments
+| User | Assigned Groups |
+|---|---|
+| remi.admin | Domain Admins, GG_IT_Admins |
+| helpdesk.user | GG_Helpdesk |
+| sarah.jones | GG_HR_Users |
+| john.smith | GG_Finance_Users |
+
+### IAM Concepts Implemented
+- Role-Based Access Control (RBAC)
+- Least Privilege Access
+- Group-Based Permission Management
+- Administrative Role Separation
+- Active Directory Identity Provisioning
