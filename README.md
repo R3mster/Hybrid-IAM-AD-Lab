@@ -45,3 +45,35 @@ VM Name:
 
 ```text
 REMI-DC01
+```
+## Active Directory Structure Configuration
+
+### Organizational Units Created
+- Admins
+- Users
+- Workstations
+- Servers
+- Service Accounts
+- Groups
+- Disabled Users
+
+### Security Groups Created
+- GG_IT_Admins
+- GG_Helpdesk
+- GG_HR_Users
+- GG_Finance_Users
+- GG_Remote_Users
+- GG_Workstation_Admins
+
+### Test User Accounts Created
+- remi.admin
+- john.smith
+- sarah.jones
+- helpdesk.user
+
+### IAM Concepts Practiced
+- Role-Based Access Control (RBAC)
+- Organizational Unit design
+- Security group management
+- Administrative privilege separation
+- Active Directory identity management
