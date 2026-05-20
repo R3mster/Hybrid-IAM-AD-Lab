@@ -1,4 +1,3 @@
-# Hybrid-IAM-AD-Lab
 # Hybrid IAM Active Directory Lab
 
 ## Project Overview
