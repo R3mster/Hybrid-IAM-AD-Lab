@@ -92,3 +92,33 @@ REMI-DC01
 - Group-Based Permission Management
 - Administrative Role Separation
 - Active Directory Identity Provisioning
+
+## Group Policy Objects (GPOs)
+
+### Configured Policies
+- Finance drive mapping (F:)
+- HR drive mapping (H:)
+- Item-level targeting using security groups
+- Group-based access control
+
+### GPO Features Used
+- User Configuration
+- Preferences
+- Drive Maps
+- Security Group Targeting
+
+## Troubleshooting and Lessons Learned
+
+### Issues Resolved
+- DNS misconfiguration preventing domain join
+- Broken trust relationship between client and domain
+- VMware NAT networking conflicts
+- Duplicate IPv4 addressing
+- GPO not applying due to missing domain link
+- Incorrect SMB share path configuration
+
+### Key Takeaways
+- Active Directory heavily depends on DNS
+- Clients must use the Domain Controller as their DNS server
+- GPOs must be linked to domains/OUs to apply
+- Share permissions and NTFS permissions must align
