@@ -1,124 +1,279 @@
-# Hybrid IAM Active Directory Lab
+# Hybrid IAM + Active Directory Lab
 
-## Project Overview
-This lab documents the setup of a foundational Windows Server Active Directory environment for IAM, hybrid identity, and future Entra ID/Okta integration projects.
+Enterprise-style Active Directory and IAM lab built with Windows Server 2022, VMware Workstation, Group Policy, RBAC security groups, SMB shares, and Windows 11 domain-joined clients.
 
-The goal of this lab is to simulate a small enterprise identity environment using Windows Server, Active Directory Domain Services, DNS, and later hybrid cloud identity services.
+---
 
-## Lab Objectives
-- Create a Windows Server virtual machine
-- Configure server networking
-- Install Active Directory Domain Services
-- Install DNS Server role
-- Promote the server to a Domain Controller
-- Create a new AD forest and domain
-- Prepare the environment for future IAM labs
+# Lab Overview
 
-## Lab Environment
+This project simulates a real-world enterprise Windows environment focused on:
 
-| Component | Configuration |
+- Active Directory Domain Services (AD DS)
+- DNS configuration and troubleshooting
+- Windows 11 domain joins
+- Organizational Units (OUs)
+- Security Groups
+- SMB shared folders
+- NTFS permissions
+- Role-Based Access Control (RBAC)
+- Group Policy Objects (GPOs)
+- Automated drive mapping
+- Enterprise troubleshooting scenarios
+
+The lab was built entirely in VMware Workstation using Windows Server 2022 and Windows 11 Enterprise.
+
+---
+
+# Lab Architecture
+
+## Domain Controller
+
+| Component | Details |
 |---|---|
-| Host Machine | Windows 10 Pro Desktop |
-| Hypervisor | VMware Workstation Pro |
-| VM Name | REMI-DC01 |
-| Server OS | Windows Server 2022 Evaluation |
-| Domain | corp.remilab.local |
-| NetBIOS Name | CORP |
-| Server Role | Domain Controller, DNS Server |
+| Hostname | REMI-DC01 |
+| OS | Windows Server 2022 |
+| Roles | AD DS, DNS |
+| IP Address | 192.168.75.128 |
+| DNS | 127.0.0.1 |
+| Network Type | VMware NAT |
 
-## Work Completed
+---
 
-### 1. Verified Host Virtualization Support
-Confirmed the host machine supports virtualization.
+## Client Workstation
 
-Key findings:
-- Virtualization enabled in firmware
-- Windows 10 Pro host
-- 24 GB physical memory
-- Hyper-V capable hardware
+| Component | Details |
+|---|---|
+| Hostname | REMI-CL01 |
+| OS | Windows 11 Enterprise |
+| IP Address | 192.168.75.129 |
+| DNS Server | 192.168.75.128 |
+| Domain Joined | Yes |
 
-### 2. Created Windows Server VM
-Created a new VMware virtual machine for the domain controller.
+---
 
-VM Name:
+# Active Directory Structure
+
+## Organizational Units (OUs)
 
 ```text
-REMI-DC01
+Corp Users
+├── HR
+├── Finance
+├── IT
+
+Corp Computers
+├── Workstations
+├── Servers
 ```
-## Active Directory Structure Configuration
 
-### Organizational Units Created
-- Admins
-- Users
-- Workstations
-- Servers
-- Service Accounts
-- Groups
-- Disabled Users
+---
 
-### Security Groups Created
-- GG_IT_Admins
-- GG_Helpdesk
-- GG_HR_Users
-- GG_Finance_Users
-- GG_Remote_Users
-- GG_Workstation_Admins
+## Security Groups
 
-### Test User Accounts Created
-- remi.admin
-- john.smith
-- sarah.jones
-- helpdesk.user
-
-### IAM Concepts Practiced
-- Role-Based Access Control (RBAC)
-- Organizational Unit design
-- Security group management
-- Administrative privilege separation
-- Active Directory identity management
-## RBAC and Identity Management
-
-### User-to-Role Assignments
-| User | Assigned Groups |
+| Group Name | Purpose |
 |---|---|
-| remi.admin | Domain Admins, GG_IT_Admins |
-| helpdesk.user | GG_Helpdesk |
-| sarah.jones | GG_HR_Users |
-| john.smith | GG_Finance_Users |
+| GG_HR_Users | HR department access |
+| GG_Finance_Users | Finance department access |
+| GG_IT_Admins | IT administrative access |
+| GG_Remote_Users | Remote access permissions |
+| GG_Workstation_Admins | Workstation administration |
 
-### IAM Concepts Implemented
-- Role-Based Access Control (RBAC)
-- Least Privilege Access
-- Group-Based Permission Management
-- Administrative Role Separation
-- Active Directory Identity Provisioning
+---
 
-## Group Policy Objects (GPOs)
+## User-to-Role Mapping
 
-### Configured Policies
-- Finance drive mapping (F:)
-- HR drive mapping (H:)
-- Item-level targeting using security groups
-- Group-based access control
+| User | Department | Security Groups |
+|---|---|---|
+| Sarah Jones | HR | GG_HR_Users |
+| John Smith | Finance | GG_Finance_Users |
+| remi.admin | IT | GG_IT_Admins, GG_Workstation_Admins |
 
-### GPO Features Used
+---
+
+# File Shares and RBAC Validation
+
+Created department-based SMB shares with NTFS and Share permissions enforced through Active Directory Security Groups.
+
+## Shared Folders
+
+| Share | Security Group | Drive Letter |
+|---|---|---|
+| \\REMI-DC01\Finance$ | GG_Finance_Users | F: |
+| \\REMI-DC01\HR$ | GG_HR_Users | H: |
+
+---
+
+## Validation Results
+
+### Finance Access
+- John Smith successfully accessed Finance drive.
+- Finance drive mapped automatically using GPO.
+
+### HR Access
+- Sarah Jones successfully accessed HR drive.
+- HR drive mapped automatically using GPO.
+
+### RBAC Enforcement
+- Sarah Jones received Access Denied when attempting to access Finance share.
+- Security group filtering and NTFS permissions validated successfully.
+
+---
+
+# Group Policy Objects (GPOs)
+
+## Configured Policies
+
+| GPO | Purpose |
+|---|---|
+| Finance Folder Policy | Maps Finance drive (F:) |
+| HR Folder Policy | Maps HR drive (H:) |
+| Password Policy | Password complexity and aging |
+| Account Lockout Policy | Lockout after failed login attempts |
+
+---
+
+## GPO Features Used
+
 - User Configuration
 - Preferences
 - Drive Maps
-- Security Group Targeting
+- Security Group Filtering
+- Item-Level Targeting
 
-## Troubleshooting and Lessons Learned
+---
 
-### Issues Resolved
+# Networking and DNS
+
+## DNS Configuration
+
+| Device | DNS Configuration |
+|---|---|
+| REMI-DC01 | 127.0.0.1 |
+| REMI-CL01 | 192.168.75.128 |
+
+---
+
+## Networking Validation
+
+Validated:
+- DNS resolution
+- Domain controller communication
+- SMB share connectivity
+- Group Policy application
+- Domain authentication
+
+---
+
+# Validation Commands
+
+## Verify Logged-In User
+
+```powershell
+whoami
+```
+
+## Verify DNS Resolution
+
+```powershell
+nslookup corp.remilab.local
+```
+
+## Verify Domain Controller Connectivity
+
+```powershell
+ping REMI-DC01
+```
+
+## Force Group Policy Update
+
+```powershell
+gpupdate /force
+```
+
+## Verify Mapped Drives
+
+```powershell
+net use
+```
+
+## Verify Applied GPOs
+
+```powershell
+gpresult /r
+```
+
+---
+
+# Troubleshooting and Lessons Learned
+
+## Issues Resolved
+
 - DNS misconfiguration preventing domain join
 - Broken trust relationship between client and domain
 - VMware NAT networking conflicts
 - Duplicate IPv4 addressing
+- Incorrect SMB share paths
 - GPO not applying due to missing domain link
-- Incorrect SMB share path configuration
+- Drive mapping issues caused by incorrect targeting
 
-### Key Takeaways
-- Active Directory heavily depends on DNS
-- Clients must use the Domain Controller as their DNS server
-- GPOs must be linked to domains/OUs to apply
-- Share permissions and NTFS permissions must align
+---
+
+## Key Takeaways
+
+- Active Directory heavily depends on DNS.
+- Domain clients should use the Domain Controller as their DNS server.
+- GPOs must be linked to domains or OUs to apply.
+- NTFS permissions and Share permissions must align properly.
+- RBAC simplifies scalable enterprise permission management.
+
+---
+
+# Screenshots
+
+| Area | Screenshot |
+|---|---|
+| Successful Domain Authentication | screenshots/domain-join/successful-domain-authentication.png |
+| Finance Drive Mapping | screenshots/file-shares/finance-drive-mapped.png |
+| HR Drive Mapping | screenshots/file-shares/hr-drive-mapped.png |
+| GPO Drive Mapping | screenshots/gpo/finance-drive-policy.png |
+| Access Denied Validation | screenshots/troubleshooting/access-denied-finance.png |
+| Active Directory Users and Groups | screenshots/active-directory/ad-users-and-groups.png |
+
+---
+
+# Technologies Used
+
+- Windows Server 2022
+- Windows 11 Enterprise
+- VMware Workstation
+- Active Directory Domain Services (AD DS)
+- DNS
+- Group Policy Management
+- SMB File Sharing
+- NTFS Permissions
+- PowerShell
+
+---
+
+# Future Improvements
+
+- Add Azure AD / Entra ID Hybrid Integration
+- Configure Microsoft Intune policies
+- Deploy Windows Admin Center
+- Add PowerShell automation scripts
+- Implement LAPS
+- Configure WSUS
+- Add SIEM logging and monitoring
+- Build secondary Domain Controller
+
+---
+
+# Author
+
+Remi Olarewaju
+
+LinkedIn:
+www.linkedin.com/in/oluwaremi-olarewaju
+
+GitHub:
+https://github.com/R3mster
