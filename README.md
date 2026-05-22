@@ -9,6 +9,7 @@ Enterprise-style Active Directory and IAM lab built with Windows Server 2022, VM
 This project simulates a real-world enterprise Windows environment focused on:
 
 - Active Directory Domain Services (AD DS)
+- Identity & Access Management (IAM)
 - DNS configuration and troubleshooting
 - Windows 11 domain joins
 - Organizational Units (OUs)
@@ -17,10 +18,12 @@ This project simulates a real-world enterprise Windows environment focused on:
 - NTFS permissions
 - Role-Based Access Control (RBAC)
 - Group Policy Objects (GPOs)
+- Group Policy Preferences (GPP)
 - Automated drive mapping
+- Windows Server 2022 administration
 - Enterprise troubleshooting scenarios
 
-The lab was built entirely in VMware Workstation using Windows Server 2022 and Windows 11 Enterprise.
+The lab was built entirely in VMware Workstation Pro using Windows Server 2022 and Windows 11 Enterprise.
 
 ---
 
