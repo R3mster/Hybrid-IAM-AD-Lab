@@ -232,15 +232,15 @@ gpresult /r
 
 | Area | Screenshot |
 |---|---|
-| Active Directory Structure | screenshots/active-directory/active-directory.PNG |
-| Successful Domain Login | screenshots/domain-join/successful-domain-login.png |
-| Verify Logged-In Domain User | screenshots/validation/verify-logIn.png |
-| Verify Domain Controller Connectivity | screenshots/validation/verify-domain-connectivity.png |
-| Sarah Jones Group Membership | screenshots/active-directory/SJ-member-groups.PNG |
-| John Smith Group Membership | screenshots/active-directory/JS-member-groups.PNG |
-| HR Drive Mapping GPO | screenshots/gpo/HRpolicy.PNG |
-| Finance Drive Mapping GPO | screenshots/gpo/Financepolicy.PNG |
-| Group Policy Update Validation | screenshots/validation/gpupdate-force-command.png |
+| Active Directory Structure | (screenshots/active-directory/active-directory.PNG) |
+| Successful Domain Login | (screenshots/domain-join/successful-domain-login.png) |
+| Verify Logged-In Domain User | (screenshots/validation/verify-logIn.png) |
+| Verify Domain Controller Connectivity | (screenshots/validation/verify-domain-connectivity.png) |
+| Sarah Jones Group Membership | (screenshots/active-directory/SJ-member-groups.PNG) |
+| John Smith Group Membership | (screenshots/active-directory/JS-member-groups.PNG) |
+| HR Drive Mapping GPO | (screenshots/gpo/HRpolicy.PNG) |
+| Finance Drive Mapping GPO | (screenshots/gpo/Financepolicy.PNG) |
+| Group Policy Update Validation | (screenshots/validation/gpupdate-force-command.png) |
 
 ---
 
