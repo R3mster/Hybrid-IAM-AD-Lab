@@ -232,12 +232,15 @@ gpresult /r
 
 | Area | Screenshot |
 |---|---|
-| Successful Domain Authentication | screenshots/domain-join/successful-domain-authentication.png |
-| Finance Drive Mapping | screenshots/file-shares/finance-drive-mapped.png |
-| HR Drive Mapping | screenshots/file-shares/hr-drive-mapped.png |
-| GPO Drive Mapping | screenshots/gpo/finance-drive-policy.png |
-| Access Denied Validation | screenshots/troubleshooting/access-denied-finance.png |
-| Active Directory Users and Groups | screenshots/active-directory/ad-users-and-groups.png |
+| Active Directory Structure | screenshots/active-directory/active-directory.PNG |
+| Successful Domain Login | screenshots/domain-join/successful-domain-login.png |
+| Verify Logged-In Domain User | screenshots/validation/verify-logIn.png |
+| Verify Domain Controller Connectivity | screenshots/validation/verify-domain-connectivity.png |
+| Sarah Jones Group Membership | screenshots/active-directory/SJ-member-groups.PNG |
+| John Smith Group Membership | screenshots/active-directory/JS-member-groups.PNG |
+| HR Drive Mapping GPO | screenshots/gpo/HRpolicy.PNG |
+| Finance Drive Mapping GPO | screenshots/gpo/Financepolicy.PNG |
+| Group Policy Update Validation | screenshots/validation/gpupdate-force-command.png |
 
 ---
 
